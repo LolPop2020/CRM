@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<form action="~/Employee/Post" method="post">
+    <table>
+        <tr>
+            <!--必须给每一个字段取一个唯一的name，后台控制器通过name来识别-->
+            <td>
+                DateOfBirth：<input type="text" name="DateOfBirth" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Email：<input type="text" name="Email" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                FirstName：<input type="text" name="FirstName" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                LastName：<input type="text" name="LastName" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                PhoneNumber：<input type="text" name="PhoneNumber" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+        </tr>
+    </table>
+</form>
+<input id="btnPost" type="button" value="提交777">
+<div style="width:100px;height:20px;background-color:red"></div>
+<script type="text/javascript">
+    $('#btnPost').on('click', function () {
+        //var item1 = $('#txtItem1').val();
+        //var item2 = $('#txtItem2').val();
+       
+        $.ajax({
+            type: "POST",
+            url: "../Employee/Post",
+            //beforeSend: function (xhr) {
+            //xhr.setRequestHeader("XSRF-TOKEN",
+            //$('input:hidden[name="__RequestVerificationToken"]').val());
+            //},
+            data: JSON.stringify({
+                DateOfBirth: new Date(),
+                Email: "sss",
+                FirstName: "F",
+                LastName: "z",
+                PhoneNumber: "1389890989"
+            }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                alert("成功");
+                //var dvItems = $("#dvPostItems");
+                //dvItems.empty();
+                //$.each(response, function (i, item) {
+                //    var $tr = $('<li>').append(item).appendTo(dvItems);
+                //});
+            },
+            failure: function (response) {
+                alert(response);
+            }
+        });
+
+    });
+</script>
+
